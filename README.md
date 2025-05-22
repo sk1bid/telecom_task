@@ -1,1 +1,1 @@
-telecom_task
+#### **Tasks from Telecom team | Yadro Impuls 2025**
