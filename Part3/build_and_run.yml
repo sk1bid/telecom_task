@@ -1,0 +1,40 @@
+---
+
+- name: build, run, check output
+  hosts: all
+  become: yes
+
+  vars:
+    image: "checker"
+    container: "checker_container"
+    root_path: "{{playbook_dir}}/.."
+    dockerfile_path: "Part2/Dockerfile"
+
+  tasks:
+  - name: build docker image
+    ansible.builtin.command:
+      cmd: "docker build -t {{image}} -f {{root_path}}/{{dockerfile_path}} {{root_path}}"
+  
+  - name: run script
+    community.docker.docker_container:
+      name: "{{container}}"
+      image: "{{image}}"
+      state: started
+      detach: no
+    register: container_info
+    failed_when: container_info.container.State.ExitCode == 1
+
+  - name: check exit code 0
+    debug:
+      msg: "Success!"
+    when: container_info.container.State.ExitCode == 0
+  
+  - name: get docker logs
+    ansible.builtin.command: "docker logs {{container}}"
+    register: docker_logs
+  
+  - name: print logs
+    debug:
+      var: docker_logs.stdout_lines
+
+    
