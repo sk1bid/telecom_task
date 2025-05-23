@@ -1,7 +1,9 @@
 #### **Tasks from Telecom team | Yadro Impuls 2025**
 
-Part1 (Python скрипт): для логов использовал простой print, за тело ответа взял response.content (если правильно понял задание)\n
+Part1 (Python скрипт): для логов использовал простой print, за тело ответа взял response.content (если правильно понял задание)
+
 Part2 (Dockerfile): сделал небольшую оптимизацию (почистил кеш, не плодил много слоев)
+
 Part3 (Ansible): *docker_install.yml* - устанавливаю Docker со всеми проверками
                  *build_and_run.yml* -  собираю образ и запускаю контейнер
 
